@@ -3,11 +3,16 @@ import pandas as pd
 import datetime
 
 from Write_text import WriteToText
-
+from report3 import Report3
+from report4 import Report4
+from report5 import Report5
+from report6 import Report6
+from report7 import Report7
 
 class Menu:
 
-    def display_menu(self, data_c):
+    def display_menu(self, data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                     credit_or_debit):
         print("\n                                                            ************MAIN MENU**************")
         print()
         choice = input("""
@@ -35,20 +40,38 @@ class Menu:
             print("*********************************************************\n")
             print("Your Entry has been printed above\n")
             input("Press Enter to continue...\n")
-            self.display_menu(data_c)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
         elif choice == "2":
-            WriteToText.to_text(data_c, data)
-            self.display_menu(data_c)
+            WriteToText.to_text(data_c, data, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill,
+                                amount, credit_or_debit)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "3":
+            Report3.report3(data_c, data)
+            self.display_menu(data_c,company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "4":
+            Report4.report4(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "5":
+            Report5.report5(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "6":
+            Report6.report6(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "7":
+            Report7.report7(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
             return ()
         elif choice == "8":
             return ()
@@ -59,7 +82,8 @@ class Menu:
         else:
             print("\nYou must only select either 1,2,3,4,5,6,7,8,9,0")
             input("Press Enter to continue...\n")
-            self.display_menu(data_c)
+            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                              credit_or_debit)
 
     def enter_details(self):
         company_name = self.enter_company_name()
@@ -235,5 +259,15 @@ class Menu:
 
 
 if __name__ == "__main__":
-    data = pd.read_csv("results.csv")
-    Menu().display_menu(data)
+    data = pd.read_csv("results.csv",
+                       names=['company_name', 'customer_name', 'year_of_bill', 'month_of_bill', 'day_of_bill',
+                              'amount', 'credit_or_debit'])
+    company_name = ''
+    customer_name = ''
+    year_of_bill = 0
+    month_of_bill = 0
+    day_of_bill = 0
+    amount = 0
+    credit_or_debit = ''
+    Menu().display_menu(data, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+                        credit_or_debit)
