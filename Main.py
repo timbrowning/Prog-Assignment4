@@ -8,10 +8,12 @@ from report4 import Report4
 from report5 import Report5
 from report6 import Report6
 from report7 import Report7
+from report8 import Report8
+from report9 import Report9
 
 class Menu:
 
-    def display_menu(self, data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+    def display_menu(self, data_c, company_name, customer_name, year, month, day, amount,
                      credit_or_debit):
         print("\n                                                            ************MAIN MENU**************")
         print()
@@ -26,76 +28,83 @@ class Menu:
         8: Provide a report to calculate the average spent per period of time (month/year) that can be entered by the user.
         9: Provide a report to calculate the average time between bills.
         0: Quit
-        Please enter your choice number 1-9 : """)
+        Please enter your choice number 1-9 (0 to quit) : """)
 
         if choice == "1":
-            company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount, credit_or_debit = self.enter_details()
+            company_name, customer_name, year, month, day, amount, credit_or_debit = self.enter_details()
             print("                   Customer Details")
             print("*********************************************************")
             print("Company Name: ", company_name)
             print("Customer Name: ", customer_name)
-            print("Date: ", year_of_bill, "/", month_of_bill, "/", day_of_bill, sep="")
+            print("Date: ", year, "/", month, "/", day, sep="")
             print("Amount: $", amount, sep="")
             print("Credit or Debit: \"", credit_or_debit, '"', sep="")
             print("*********************************************************\n")
             print("Your Entry has been printed above\n")
             input("Press Enter to continue...\n")
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
         elif choice == "2":
-            WriteToText.to_text(data_c, data, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill,
+            WriteToText.to_text(data_c, data, company_name, customer_name, year, month, day,
                                 amount, credit_or_debit)
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "3":
             Report3.report3(data_c, data)
-            self.display_menu(data_c,company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c,company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "4":
             Report4.report4(data_c, data)
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "5":
             Report5.report5(data_c, data)
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "6":
             Report6.report6(data_c, data)
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "7":
             Report7.report7(data_c, data)
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
             return ()
         elif choice == "8":
+            Report8.report8(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
+                              credit_or_debit)
+
             return ()
-        elif choice == "8":
+        elif choice == "9":
+            Report9.report9(data_c, data)
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
+                              credit_or_debit)
             return ()
         elif choice == "0":
             sys.exit()
         else:
             print("\nYou must only select either 1,2,3,4,5,6,7,8,9,0")
             input("Press Enter to continue...\n")
-            self.display_menu(data_c, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+            self.display_menu(data_c, company_name, customer_name, year, month, day, amount,
                               credit_or_debit)
 
     def enter_details(self):
         company_name = self.enter_company_name()
         customer_name = self.enter_customer_name(company_name)
-        year_of_bill = self.enter_year(company_name, customer_name)
-        month_of_bill = self.enter_month(company_name, customer_name, year_of_bill)
-        day_of_bill = self.enter_day(company_name, customer_name, year_of_bill, month_of_bill)
-        amount = self.enter_amount(company_name, customer_name, year_of_bill, month_of_bill, day_of_bill)
-        credit_or_debit = self.enter_credit_or_debit(company_name, customer_name, year_of_bill, month_of_bill,
-                                                     day_of_bill, amount)
+        year = self.enter_year(company_name, customer_name)
+        month = self.enter_month(company_name, customer_name, year)
+        day = self.enter_day(company_name, customer_name, year, month)
+        amount = self.enter_amount(company_name, customer_name, year, month, day)
+        credit_or_debit = self.enter_credit_or_debit(company_name, customer_name, year, month,
+                                                     day, amount)
 
-        return company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount, credit_or_debit
+        return company_name, customer_name, year, month, day, amount, credit_or_debit
 
     def enter_company_name(self):
         temp = ""
@@ -146,7 +155,7 @@ class Menu:
                 input("Press Enter to continue...\n")
                 return year
 
-    def enter_month(self, company_name, customer_name, year_of_bill):
+    def enter_month(self, company_name, customer_name, year):
         temp = ""
         monthdict = {1: 'Janauary',
                      2: 'February',
@@ -166,7 +175,7 @@ class Menu:
             print("*********************************************************")
             print("Company Name: ", company_name)
             print("Customer Name: ", customer_name)
-            print("Year: ", year_of_bill)
+            print("Year: ", year)
             print("*********************************************************\n")
             while month < 1 or month > 12:
                 try:
@@ -184,15 +193,15 @@ class Menu:
                 input("Press Enter to continue...\n")
                 return month
 
-    def enter_day(self, company_name, customer_name, year_of_bill, month_of_bill):
+    def enter_day(self, company_name, customer_name, year, month):
         temp = ""
         while temp != 'y':
             day = 0
             print("*********************************************************")
             print("Company Name: ", company_name)
             print("Customer Name: ", customer_name)
-            print("Year: ", year_of_bill)
-            print("Month: ", month_of_bill)
+            print("Year: ", year)
+            print("Month: ", month)
             print("*********************************************************\n")
             while day < 1 or day > 31:
                 try:
@@ -210,14 +219,14 @@ class Menu:
                 input("Press Enter to continue...\n")
                 return day
 
-    def enter_amount(self, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill):
+    def enter_amount(self, company_name, customer_name, year, month, day):
         temp = ""
         while temp != 'y':
             amount = 1
             print("*********************************************************")
             print("Company Name: ", company_name)
             print("Customer Name: ", customer_name)
-            print("Year:", year_of_bill, " Month:", month_of_bill, " Day: ", day_of_bill, sep="")
+            print("Year:", year, " Month:", month, " Day: ", day, sep="")
             print("*********************************************************\n")
             try:
                 amount = float(input("Enter amount? \n>"))
@@ -231,14 +240,14 @@ class Menu:
                 input("Press Enter to continue...\n")
                 return amount
 
-    def enter_credit_or_debit(self, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount):
+    def enter_credit_or_debit(self, company_name, customer_name, year, month, day, amount):
         temp = ""
         while temp != 'y':
             credit_debit = ''
             print("*********************************************************")
             print("Company Name: ", company_name)
             print("Customer Name: ", customer_name)
-            print("Year:", year_of_bill, " Month:", month_of_bill, " Day: ", day_of_bill, sep="")
+            print("Year:", year, " Month:", month, " Day: ", day, sep="")
             print("Amount: $", amount, sep="")
             print("*********************************************************\n")
             while credit_debit != 'c' and credit_debit != 'd':
@@ -260,14 +269,14 @@ class Menu:
 
 if __name__ == "__main__":
     data = pd.read_csv("results.csv",
-                       names=['company_name', 'customer_name', 'year_of_bill', 'month_of_bill', 'day_of_bill',
+                       names=['company_name', 'customer_name', 'year', 'month', 'day',
                               'amount', 'credit_or_debit'])
     company_name = ''
     customer_name = ''
-    year_of_bill = 0
-    month_of_bill = 0
-    day_of_bill = 0
+    year = 0
+    month = 0
+    day = 0
     amount = 0
     credit_or_debit = ''
-    Menu().display_menu(data, company_name, customer_name, year_of_bill, month_of_bill, day_of_bill, amount,
+    Menu().display_menu(data, company_name, customer_name, year, month, day, amount,
                         credit_or_debit)
